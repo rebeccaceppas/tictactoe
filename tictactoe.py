@@ -72,8 +72,6 @@ def stop(var, p):
         var = False
     else:
         var = True """
-
-
 #def stop(var, p):
    # if grid[0:3](grid[0] and grid[1] and grid[2]) != '   ':
     #    var = False
@@ -95,25 +93,6 @@ def stop(var, p):
         var = False
     else:
         var = True
-
-def result(L):
-    if len(L) == 9:
-        ask = input('It was a tie! Would you like to play again? (Y/N)\n')
-        if ask.upper() == 'Y':
-            print('You are are the \'X\' and this is your board\n')
-            sampleboard()
-            clear()
-            game()
-        else:
-            print('See you next time!')
-    elif ((grid[0] and grid[1] and grid[2]) | (grid[3] and grid[4] and grid[5]) | (grid[6] and grid[7] and grid[8]) | (grid[0] and grid[4] and grid[5]) | (grid[2] and grid[4] and grid[6]) | (grid[0] and grid[3] and grid[6]) | (grid[1] and grid[4] and grid[8]) | (grid[2] and grid[5] and grid[8])) == ' X ':
-        ask = input('You won! Would you like to play again? (Y/N)\n')
-        if ask.upper() == 'Y':
-            print('You are are the \'X\' and this is your board\n')
-            sampleboard()
-            clear()
-            game()
-
  """
 def game(): 
     choices = []
@@ -131,14 +110,17 @@ def game():
             board()
         else:
             replace(int(play))
+            choices.append(play)
             rand = random.randint(0,8)
             while str(rand+1) in choices:
                 rand = random.randint(0,8)
             grid[rand] = ' O '
             board()
             choices.append(str(rand+1))
-            choices.append(play)
-            stop(cont, choices)
+            #stop(cont, choices)
+            if len(choices) == 9:
+                cont = False
+        
     
     ask = input('Do you want to play again? (Y/N)\n')
     if ask.upper() == 'Y':
