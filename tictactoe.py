@@ -23,10 +23,52 @@ def clear():
 def replace(x):
     grid[x-1] = ' X '
 
+def stop(var, p):
+    if (grid[0] & grid[1] & grid[2]) != '   ':
+        var = False
+    elif (grid[3] & grid[4] & grid[5]) != '   ':
+        var = False
+    elif (grid[6] & grid[7] & grid[8]) != '   ':
+        var = False
+    elif (grid[0] & grid[4] & grid[5]) != '   ':
+        var = False
+    elif (grid[2] & grid[4] & grid[6]) != '   ':
+        var = False
+    elif (grid[0] & grid[3] & grid[6]) != '   ':
+        var = False
+    elif (grid[1] & grid[4] & grid[8]) != '   ':
+        var = False
+    elif (grid[2] & grid[5] & grid[8]) != '   ':
+        var = False
+    elif len(p) == 9:
+        var = False
+    else:
+        var = True
+
+def result(L):
+    if len(L) == 9:
+        ask = input('It was a tie! Would you like to play again? (Y/N)\n')
+        if ask.upper() == 'Y':
+            print('You are are the \'X\' and this is your board\n')
+            sampleboard()
+            clear()
+            game()
+        else:
+            print('See you next time!')
+    elif ((grid[0] & grid[1] & grid[2]) | (grid[3] & grid[4] & grid[5]) | (grid[6] & grid[7] & grid[8]) | (grid[0] & grid[4] & grid[5]) | (grid[2] & grid[4] & grid[6]) | (grid[0] & grid[3] & grid[6]) | (grid[1] & grid[4] & grid[8]) | (grid[2] & grid[5] & grid[8])) == ' X ':
+        ask = input('You won! Would you like to play again? (Y/N)\n')
+        if ask.upper() == 'Y':
+            print('You are are the \'X\' and this is your board\n')
+            sampleboard()
+            clear()
+            game()
+
+
 def game(): 
     choices = []
     rand = 0
     cont = True
+    
     while cont:
 
         play = input('Where do you want to put your X? (1-9)\n')
@@ -45,13 +87,9 @@ def game():
             board()
             choices.append(str(rand+1))
             choices.append(play)
-
-            
-
-
-        #what it input is not 1-9
-        #set cont = function() that checks if row, column or diagonal has all Xs or Os or if all squares have been filled
+            stop(cont, choices)
     
+    result(choices)
 
 
 start = input('Do you want to play tictactoe? (Y/N)\n')
