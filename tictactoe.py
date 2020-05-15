@@ -38,13 +38,13 @@ def game():
             board()
         else:
             replace(int(play))
-            choices.append(play)
             rand = random.randint(0,8)
-            while (rand+1) in choices:
+            while str(rand+1) in choices:
                 rand = random.randint(0,8)
             grid[rand] = ' O '
             board()
-            choices.append(rand+1)
+            choices.append(str(rand+1))
+            choices.append(play)
 
             
 
