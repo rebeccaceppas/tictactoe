@@ -11,8 +11,9 @@ def board():
     print(grid[6]+'|'+grid[7]+'|'+grid[8])
 
 def sampleboard():
-    board = '\n  1 | 2 | 3 \n ---|---|--- \n  4 | 5 | 6 \n ---|---|--- \n  7 | 8 | 9 \n ---|---|--- \n'
-    print(board)
+    for i in range(9):
+        grid[i] = ' ' + str(i+1) + ' '
+    board()
 
 
 def replace(x):
@@ -36,8 +37,8 @@ def game():
 
 start = input('Do you want to play tictactoe? (Y/N)\n')
 if start.upper() == 'Y':
-    print('You are are the \'X\' and this is your board')
-    board()
+    print('You are are the \'X\' and this is your board\n')
+    sampleboard()
     game()
 
 
