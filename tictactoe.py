@@ -42,30 +42,37 @@ def game():
             choices.append(play)
             if (grid[0:3] == [' X ']*3) or (grid[3:6] == [' X ']*3) or (grid[6:] == [' X ']*3):
                 print('You won!')
+                board()
                 count += 10
                 break
             elif ([grid[0], grid[3], grid[6]] == [' X ']*3) or ([grid[1], grid[4], grid[7]] == [' X ']*3) or ([grid[2], grid[5], grid[8]] == [' X ']*3):
                 print('You won!')
+                board()
                 count += 10
                 break
             elif ([grid[0], grid[4], grid[8]] == [' X ']*3) or ([grid[2], grid[4], grid[6]] == [' X ']*3):
                 print('You won!')
+                board()
                 count += 10
                 break
             elif (grid[0:3] == [' O ']*3) or (grid[3:6] == [' O ']*3) or (grid[6:] == [' O ']*3):
                 print('You lost!')
+                board()
                 count += 10
                 break
             elif ([grid[0], grid[3], grid[6]] == [' O ']*3) or ([grid[1], grid[4], grid[7]] == [' O ']*3) or ([grid[2], grid[5], grid[8]] == [' O ']*3):
                 print('You lost!')
+                board()
                 count += 10
                 break
             elif ([grid[0], grid[4], grid[8]] == [' O ']*3) or ([grid[2], grid[4], grid[6]] == [' O ']*3):
                 print('You lost')
+                board()
                 count += 10
                 break
             elif len(choices) == 9:
                 print('It was a tie!')
+                board()
                 count += 10
                 break
             else:
