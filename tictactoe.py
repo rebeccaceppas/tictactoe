@@ -23,83 +23,12 @@ def clear():
 def replace(x):
     grid[x-1] = ' X '
 
-def stop(var, p):
-    if (grid[0:3] or grid[3:6] or grid[6:]) == [' X ']*3:
-        print('You won!')
-        var = False
-    elif [grid[0], grid[3], grid[6]] or [grid[1], grid[4], grid[7]] or [grid[2], grid[5], grid[8]] == [' X ']*3:
-        print('You won!')
-        var = False
-    elif [grid[0], grid[4], grid[8]] or [grid[2], grid[4], grid[6]] == [' X ']*3:
-        print('You won!')
-        var = False
-    elif (grid[0:3] or grid[3:6] or grid[6:]) == [' O ']*3:
-        print('You lost!')
-        var = False
-    elif [grid[0], grid[3], grid[6]] or [grid[1], grid[4], grid[7]] or [grid[2], grid[5], grid[8]] == [' X ']*3:
-        print('You lost!')
-        var = False
-    elif [grid[0], grid[4], grid[8]] or [grid[2], grid[4], grid[6]] == [' O ']*3:
-        print('You lost')
-        var = False
-    elif len(p) == 9:
-        print('It was a tie!')
-        var = False
-    else:
-        var = True
-
-""" def stop(var, p):
-    if (set(grid[0:3]) | set(grid[3:6]) | set(grid[6:])) == {' X '}:
-        print('You won!')
-        var = False
-    elif (set(grid[0], grid[3], grid[6]) | set(grid[1], grid[4], grid[7]) | set(grid[2], grid[5], grid[8])) == {' X '}:
-        print('You won!')
-        var = False
-    elif (set(grid[0], grid[4], grid[8]) | set(grid[2], grid[4], grid[6])) == {' X '}:
-        print('You won!')
-        var = False
-    elif (set(grid[0:3]) | set(grid[3:6]) | set(grid[6:])) == {' O '}:
-        print('You lost!')
-        var = False
-    elif (set(grid[0], grid[3], grid[6]) | set(grid[1], grid[4], grid[7]) | set(grid[2], grid[5], grid[8])) == {' O '}:
-        print('You lost!')
-        var = False
-    elif (set(grid[0], grid[4], grid[8]) | set(grid[2], grid[4], grid[6])) == {' O '}:
-        print('You lost')
-        var = False
-    elif len(p) == 9:
-        print('It was a tie!')
-        var = False
-    else:
-        var = True """
-#def stop(var, p):
-   # if grid[0:3](grid[0] and grid[1] and grid[2]) != '   ':
-    #    var = False
-    #elif (grid[3] and grid[4] and grid[5]) != '   ':
-     #   var = False
-    #elif (grid[6] and grid[7] and grid[8]) != '   ':
-     #   var = False
-    #elif (grid[0] and grid[4] and grid[5]) != '   ':
-     #   var = False
-"""     elif (grid[2] and grid[4] and grid[6]) != '   ':
-        var = False
-    elif (grid[0] and grid[3] and grid[6]) != '   ':
-        var = False
-    elif (grid[1] and grid[4] and grid[8]) != '   ':
-        var = False
-    elif (grid[2] and grid[5] and grid[8]) != '   ':
-        var = False
-    elif len(p) == 9:
-        var = False
-    else:
-        var = True
- """
 def game(): 
     choices = []
     rand = 0
-    cont = True
+    count = 0
     
-    while cont:
+    while count == 0:
 
         play = input('Where do you want to put your X? (1-9)\n')
         if play not in ['1','2','3','4','5','6','7','8','9']:
@@ -111,26 +40,81 @@ def game():
         else:
             replace(int(play))
             choices.append(play)
+            if (grid[0:3] == [' X ']*3) or (grid[3:6] == [' X ']*3) or (grid[6:] == [' X ']*3):
+                print('You won!')
+                count += 10
+                break
+            elif ([grid[0], grid[3], grid[6]] == [' X ']*3) or ([grid[1], grid[4], grid[7]] == [' X ']*3) or ([grid[2], grid[5], grid[8]] == [' X ']*3):
+                print('You won!')
+                count += 10
+                break
+            elif ([grid[0], grid[4], grid[8]] == [' X ']*3) or ([grid[2], grid[4], grid[6]] == [' X ']*3):
+                print('You won!')
+                count += 10
+                break
+            elif (grid[0:3] == [' O ']*3) or (grid[3:6] == [' O ']*3) or (grid[6:] == [' O ']*3):
+                print('You lost!')
+                count += 10
+                break
+            elif ([grid[0], grid[3], grid[6]] == [' O ']*3) or ([grid[1], grid[4], grid[7]] == [' O ']*3) or ([grid[2], grid[5], grid[8]] == [' O ']*3):
+                print('You lost!')
+                count += 10
+                break
+            elif ([grid[0], grid[4], grid[8]] == [' O ']*3) or ([grid[2], grid[4], grid[6]] == [' O ']*3):
+                print('You lost')
+                count += 10
+                break
+            elif len(choices) == 9:
+                print('It was a tie!')
+                count += 10
+                break
+            else:
+                count = 0
             rand = random.randint(0,8)
             while str(rand+1) in choices:
                 rand = random.randint(0,8)
             grid[rand] = ' O '
             board()
             choices.append(str(rand+1))
-            #stop(cont, choices)
-            if len(choices) == 9:
-                cont = False
-        
+            if (grid[0:3] == [' X ']*3) or (grid[3:6] == [' X ']*3) or (grid[6:] == [' X ']*3):
+                print('You won!')
+                count += 10
+                break
+            elif ([grid[0], grid[3], grid[6]] == [' X ']*3) or ([grid[1], grid[4], grid[7]] == [' X ']*3) or ([grid[2], grid[5], grid[8]] == [' X ']*3):
+                print('You won!')
+                count += 10
+                break
+            elif ([grid[0], grid[4], grid[8]] == [' X ']*3) or ([grid[2], grid[4], grid[6]] == [' X ']*3):
+                print('You won!')
+                count += 10
+                break
+            elif (grid[0:3] == [' O ']*3) or (grid[3:6] == [' O ']*3) or (grid[6:] == [' O ']*3):
+                print('You lost!')
+                count += 10
+                break
+            elif ([grid[0], grid[3], grid[6]] == [' O ']*3) or ([grid[1], grid[4], grid[7]] == [' O ']*3) or ([grid[2], grid[5], grid[8]] == [' O ']*3):
+                print('You lost!')
+                count += 10
+                break
+            elif ([grid[0], grid[4], grid[8]] == [' O ']*3) or ([grid[2], grid[4], grid[6]] == [' O ']*3):
+                print('You lost')
+                count += 10
+                break
+            elif len(choices) == 9:
+                print('It was a tie!')
+                count += 10
+                break
+            else:
+                count = 0
     
-    ask = input('Do you want to play again? (Y/N)\n')
-    if ask.upper() == 'Y':
+    repeat = input('Do you want to play again? (Y/N)\n')
+    if repeat.upper() == 'Y':
         print('You are are the \'X\' and this is your board\n')
         sampleboard()
         clear()
         game()
     else:
         print('See you next time!')
-
 
 start = input('Do you want to play tictactoe? (Y/N)\n')
 if start.upper() == 'Y':
@@ -140,9 +124,3 @@ if start.upper() == 'Y':
     game()
 else:
     print('See you next time!')
-
-
-
-
-
-
